@@ -19,7 +19,7 @@ export default function EditProduct(props) {
         setCategory(props.product.catId);
         setStatus(props.product.status);
         setImage(props.product.image);
-    }, [])
+    }, [props.product])
 
     const editProduct = async(e) => {
         e.preventDefault();
@@ -44,6 +44,7 @@ export default function EditProduct(props) {
             .then((res) => {
                 if (res === true) {
                     alert('Product Successfully Updated!');
+                    window.location.reload();
                 }
                 else {
                     alert('Something went wrong!');
@@ -96,7 +97,7 @@ export default function EditProduct(props) {
                             </div>
                             <div className="form-group">
                                 <label className="form-label">Product Image:</label>
-                                <input required required multiple={false} className="form-control" type="file" onChange={e => { setProductFile(e.target.files[0]); setProductDefaultFile(URL.createObjectURL(e.target.files[0])) }} />
+                                <input   multiple={false} className="form-control" type="file" onChange={e => { setProductFile(e.target.files[0]); setProductDefaultFile(URL.createObjectURL(e.target.files[0])) }} />
                             </div>
 
                             <button

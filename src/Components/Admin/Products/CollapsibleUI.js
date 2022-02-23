@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as FaIcons from 'react-icons/fa';
 import {
     Link
@@ -6,7 +6,6 @@ import {
 import { baseUrl } from "../../baseUrl";
 import DeleteCategory from "../Delete/DeleteCategory";
 import EditCategory from "../Edit/EditCategory";
-import EditProduct from "../Edit/EditProduct";
 import DeleteProduct from "../Delete/DeleteProduct";
 // import { baseUrl } from "../baseUrl";
 //import { baseUrl } from "../../Shared/BaseUrl";
@@ -16,8 +15,9 @@ export default function CollapsibleUI(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [isEditCategory, setIsEditCategory] = useState(false);
     const [isEditProduct, setIsEditProduct] = useState(false);
-    const [isDeleteProduct, setIsDeleteProduct] = useState(false);
     const [isDeleteCategory, setIsDeleteCategory] = useState(false);
+
+
 
 
     return (
@@ -56,12 +56,12 @@ export default function CollapsibleUI(props) {
                                     <div className="d-flex justify-content-between">
                                         <p className="lead my-auto">Rs.{m.price}</p>
                                         <div className="d-flex p-2">
-                                            <FaIcons.FaEdit onClick={() => { setIsEditProduct(true); }} />
-                                            <FaIcons.FaTrashAlt onClick={() => { setIsDeleteProduct(true); }}
+                                            <FaIcons.FaEdit product={m} onClick={() => { props.onEditProduct(m); }} />
+                                            <FaIcons.FaTrashAlt onClick={() => { props.onDeleteProduct(m); }}
                                                 className="ms-1" />
                                         </div>
-                                        <EditProduct categories={props.categories} product={m}  open={isEditProduct} onClose={() => { setIsEditProduct(false) }} />
-                                        <DeleteProduct id={m.id} open={isDeleteProduct} onClose={() => { setIsDeleteProduct(false) }} />
+                                        {/* <EditProduct categories={props.categories} product={m}  open={isEditProduct} onClose={() => { setIsEditProduct(false) }} /> */}
+                                        
 
                                     </div>
                                     <p className="fs-5 fw-bold">{m.name}</p>
@@ -73,7 +73,7 @@ export default function CollapsibleUI(props) {
                         );
                     })}
                 </div>
-
+                
             </div>
         </div>
     );

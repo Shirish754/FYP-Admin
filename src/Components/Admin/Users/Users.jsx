@@ -8,10 +8,17 @@ export default function Users() {
     return (
         <div>
             <section>
-                <div className="d-flex flex-wrap justify-content-between">
-                    <p>All Users</p>
-                    <button>Create</button>
-                </div>
+            
+                    <div className="d-flex flex-wrap justify-content-between p-4" style={{background:"#FFFFFF" }}>
+                       <div className="d-flex">
+                            <h4>Customers</h4>
+                            
+                        </div> 
+                        <div>
+                            <button className="btn btn fw-bold  ms-2" style={{background:"#2F80ED" ,color:"#FFFFFF"}}>Create</button> 
+                        </div> 
+                        
+                    </div>
                 
                 <div className>
                     <table className="table">

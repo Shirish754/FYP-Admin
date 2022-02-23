@@ -11,12 +11,15 @@ export default function Order() {
             
             </div>
                 <section>
-                    <div>
-                        <div className="d-flex flex-wrap justify-content-between">
-                        <p>All Users</p>
-                        <button>Create</button>
-                    </div>
-
+                <div className="d-flex flex-wrap justify-content-between p-4" style={{background:"#FFFFFF" }}>
+                       <div className="d-flex">
+                            <h4>Orders</h4>
+                            
+                        </div> 
+                        <div>
+                            <button className="btn btn fw-bold  ms-2" style={{background:"#2F80ED" ,color:"#FFFFFF"}}>Create</button> 
+                        </div> 
+                        
                     </div>
                     <div>
                 <table class="table">
