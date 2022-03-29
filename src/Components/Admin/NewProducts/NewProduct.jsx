@@ -91,12 +91,12 @@ export default function NewProduct(props) {
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Select Images</label>
-                                <input required required multiple={false} className="form-control" type="file" onChange={e => { setCatImage(e.target.files[0]); setDefaultCatImage(URL.createObjectURL(e.target.files[0])) }} />
+                                <input required  multiple={false} className="form-control" type="file" onChange={e => { setCatImage(e.target.files[0]); setDefaultCatImage(URL.createObjectURL(e.target.files[0])) }} />
                             </div>
                             <button style={{
                                 background:"#2F80ED" ,
                                 color:"#FFFFFF"
-                            }} className="btn btn fw-bold  ms-2"
+                            }} className="btn btn fw-bold  ms-2 mb-1"
                             >Add</button>
                             </form>
                             <img alt="" className="mt-2" src={catDefaultImage} style={{ width: "100%", height: "85%", objectFit: 'cover', display: productDefaultFile ? "block" : 'none' }} />
@@ -139,14 +139,14 @@ export default function NewProduct(props) {
                                     </div>
                                     <div className="form-group">
                                         <label className="form-label">Product Image:</label>
-                                        <input required required multiple={false} className="form-control" type="file" onChange={e => { setProductFile(e.target.files[0]); setProductDefaultFile(URL.createObjectURL(e.target.files[0])) }} />
+                                        <input required  multiple={false} className="form-control" type="file" onChange={e => { setProductFile(e.target.files[0]); setProductDefaultFile(URL.createObjectURL(e.target.files[0])) }} />
                                     </div>
 
                                     <button
                                         style={{
                                             background: "#2F80ED",
                                             color: "#FFFFFF"
-                                        }} className="btn btn fw-bold  ms-2 mt-3"
+                                        }} className="btn btn fw-bold  ms-2 mt-3 mb-3"
                                     >Add</button>
                                     <img alt="" className="mt-2" src={productDefaultFile} style={{ width: "100%", height: "85%", objectFit: 'cover', display: productDefaultFile ? "block" : 'none' }} />
 

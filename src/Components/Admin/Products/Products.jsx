@@ -71,7 +71,7 @@ export default function Products() {
                         
 
                     </div>
-                    <div className="pt-3 pe-3">
+                    <div className="pt-4 pe-4">
                     <input onChange={(e)=>{setSearchQuery(e.target.value);}} value={searchQuery} placeholder="Search Products . . ." className="form-control ms-2"/>
                     </div>
                 </div>

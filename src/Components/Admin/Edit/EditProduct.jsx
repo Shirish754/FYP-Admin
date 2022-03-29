@@ -104,7 +104,7 @@ export default function EditProduct(props) {
                                 style={{
                                     background: "#2F80ED",
                                     color: "#FFFFFF"
-                                }} className="btn btn fw-bold  ms-2 mt-3"
+                                }} className="btn btn fw-bold  ms-2 mt-3 mb-2"
                             >Add</button>
                             {productDefaultFile || productFile ?
                                 <img alt="" src={productDefaultFile} style={{ width: "100%", height: "85%", objectFit: 'cover' }} />

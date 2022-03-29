@@ -72,7 +72,7 @@ export default function EditCategory(props) {
                                 <button type='submit' style={{
                                     background: "#2F80ED",
                                     color: "#FFFFFF"
-                                }} className="btn btn fw-bold  ms-2"
+                                }} className="btn btn fw-bold  ms-2 mb-2"
                                 >Edit</button>
                             </form>
                             {catDefaultImage || catImage ?

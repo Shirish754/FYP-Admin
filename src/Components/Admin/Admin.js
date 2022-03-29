@@ -9,6 +9,7 @@ import {
 import Home from "./Home/Home";
 import Order from "./Orders/Order";
 import Products from "./Products/Products";
+import ProductDesc from "./Products/ProductDesc";
 import Sidebar from "./sidebar/Sidebar";
 import Users from "./Users/Users";
 import Top from "./Top/Top";
@@ -31,7 +32,8 @@ function Admin(props) {
                     <Top/>
                         <Switch>
                             <Route exact path="/" component={Home}/>
-                            <Route exact path="/products" component={Products}/>
+                            <Route exact path="/products" component={()=> <Products/>}/>
+                            <Route exact path="/products/:id" component={({match})=><ProductDesc id={match.params.id}/>} />
                             <Route exact path="/users" component={Users}/>
                             <Route exact path="/orders" component={Order}/>
                             <Redirect to="/"/>
