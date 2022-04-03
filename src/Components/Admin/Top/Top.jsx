@@ -18,9 +18,8 @@ export default function Top() {
                     <div className="d-flex flex-wrap ">
                         
                     <p className=" " style={{fontSize:"25px"}}>
-                    <img className="p-1 rounded-circle w-25" src={`https://ui-avatars.com/api/?background=ffffff&color=000000&name=${JSON.parse(localStorage.getItem('hamrovet-token')).userName}`}/>
-                        {JSON.parse(localStorage.getItem('hamrovet-token')).userName }
-                        
+                    <img className="p-1 rounded-circle w-25" src={`https://ui-avatars.com/api/?background=ffffff&color=000000&name=${JSON.parse(localStorage.getItem('hamrovet-admin-token')).userName}`}/>
+                        {JSON.parse(localStorage.getItem('hamrovet-admin-token')).userName }
                     </p>
                     </div>
 

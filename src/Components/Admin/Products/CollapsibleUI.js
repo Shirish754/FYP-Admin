@@ -51,7 +51,9 @@ export default function CollapsibleUI(props) {
                             <div className="col-12 col-sm-2 col-md-4 col-lg-3 p-2 " key={index}>
                                 <div className="col-12 bg-white shadow rounded p-2">
                                     <div>
-                                        <img style={{ height: 200, width: "100%", objectFit: "cover" }} src={baseUrl + m.image} />
+                                    <Link to={`/products/${m.id}`}>
+                                    <img style={{ height: 200, width: "100%", objectFit: "cover" }} src={baseUrl + m.image} />
+                                    </Link>
                                     </div>
                                     <div className="d-flex justify-content-between">
                                         <p className="lead my-auto">Rs.{m.price}</p>
@@ -66,7 +68,7 @@ export default function CollapsibleUI(props) {
                                     </div>
                                     <p className="fs-5 fw-bold">{m.name}</p>
                                     <div>
-                                        <Link to={`/products/${m.id}`}>View Details</Link>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ import {
 import * as FaIcons from 'react-icons/fa';
 import { ListGroup } from 'react-bootstrap';
 import { BsArrowLeft } from "react-icons/bs";
+import { Table } from 'reactstrap';
 
 export default function Order() {
     return (
@@ -33,13 +34,12 @@ export default function Order() {
                             marginTop: '20px',
 
                             }}>
-                            <div className='d-flex justify-content-center'>
+                            <div className='d-flex justify-content-center col-12 col-sm-6 col-md-12 col-lg-12'>
                             <div className='col-md-12 border border-light p-4' style={{ backgroundColor: '#fff', borderRadius: "25px"}}>
                                 <div className='d-flex justify-content-between pb-3'>
-                                <ListGroup horizontal className='border-bottom '>
+                                {/* <ListGroup horizontal className='border-bottom '>
                                         <ListGroup.Item style={{ width: '20%' }} className='border-0 '><p>Text</p></ListGroup.Item>
                                         <ListGroup.Item style={{ width: '25%' }} className='border-0 d-flex flex-column align-items-start '>
-                                        <p className='text-muted mb-0 d-flex align-items-start'><b>Category</b></p>
                                         <p className='mb-0 d-flex align-items-start'>Product Name</p>
                                         </ListGroup.Item>
                                         <ListGroup.Item style={{ width: '30%' }} className='border-0 d-block my-auto '>
@@ -48,6 +48,8 @@ export default function Order() {
                                         </div>
                                         </ListGroup.Item>
                                         <ListGroup.Item style={{ width: '15%' }} className='border-0 d-flex align-items-center '>Rs. 100</ListGroup.Item> 
+                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center '>Action</ListGroup.Item> 
+                                        
                                     </ListGroup>  
                                 </div>
                                 <div className=''>
@@ -63,8 +65,37 @@ export default function Order() {
                                         </div>
                                         </ListGroup.Item>
                                         <ListGroup.Item style={{ width: '15%' }} className='border-0 d-flex align-items-center '>Rs. 100</ListGroup.Item> 
-                                    </ListGroup>
-                                
+                                    </ListGroup> */}
+                               <Table hover>
+        <thead className=''>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </Table>
 
                                 </div>
                                 
@@ -72,6 +103,7 @@ export default function Order() {
                                 <p> <BsArrowLeft /> Back to Shop</p>
                                 </div>
                             </div>
+
                             </div>
                         </div>
                         
