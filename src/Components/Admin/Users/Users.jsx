@@ -5,8 +5,33 @@ import {
 import * as FaIcons from 'react-icons/fa';
 import { BsArrowLeft } from "react-icons/bs";
 import { ListGroup } from "react-bootstrap";
+import { Table } from "reactstrap";
+import EditUser from "../Edit/Edit User";
+import CreateUser from "./CreateUser";
+import DeleteUser from "../Delete/DeleteUser";
+import { baseUrl } from "../../baseUrl";
 
 export default function Users() {
+
+    const [editUser,setEditUser] = useState(false);
+    const [createUser, setCreateUser] = useState(false);
+    const [deleteUser,setDeleteUser] = useState(false);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetchUserAPI();
+    }, [])
+
+    const fetchUserAPI = async () => {
+        await fetch(baseUrl + 'user/getAllUsers.php')
+            .then((res) => res.json())
+            .then((res) => {
+                setUsers(res);
+                console.log(res);
+            })
+            .catch((e) => alert('Something went wrong!'));
+
+    }
     return (
         <div>
             <section>
@@ -17,105 +42,66 @@ export default function Users() {
                             
                         </div> 
                         <div>
-                            <button className="btn btn fw-bold  ms-2" style={{background:"#2F80ED" ,color:"#FFFFFF"}}>Create</button> 
+                            <button className="btn btn fw-bold  ms-2" style={{background:"#2F80ED" ,color:"#FFFFFF"}} onClick={() => { setCreateUser(true); }}>Create</button> 
+                            <CreateUser open={createUser} onClose={() => { setCreateUser(false) }}/>
                         </div> 
                         
                     </div>
-                
-                {/* <div className ="mt-4 bg-white">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Customers</th>
-                            <th scope="col">UserId</th>
-                            <th scope="col">EmailId</th>
-                            <th scope="col">Contacts</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Action</th>
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>tcguy</td>
-                            <td>tcguy</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>tcguy</td>
-                            <td>tcguy</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>tcguy</td>
-                            <td>tcguy</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    
-                </div> */}
+                    <div className="pt-4 pe-4">
+                       <input  placeholder="Search Users . . ." className="form-control ms-2"/>
+                    </div>
 
-                <section className='d-flex justify-content-center align-items-center'
-                        style={{
-                            height: 'auto',
-                            fontFamily: 'sans-serif',
-                        }}>
-                        <div className='d-flex align-items-center justify-content-center p-5'
-                            style={{
-                            marginTop: '20px',
+                    <section style={{background:"#FFFFFF" }} className='mt-4 p-3 m-2'>
 
-                            }}>
-                            <div className='d-flex justify-content-center col-12 col-sm-6 col-md-12 col-lg-12'>
-                            <div className='col-md-12 border border-light p-4 m-4' style={{ backgroundColor: '#fff', borderRadius: "25px"}}>
-                                <div className='d-flex justify-content-between '>
-                                <ListGroup horizontal className='border-bottom '>
-                                        <ListGroup.Item style={{ width: '20%' }} className='border-0 d-flex align-items-center '><b>CustomerId</b></ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '25%' }} className='border-0 d-flex align-items-center '><b>UserName</b></ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center'><b>Contact </b></ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '15%' }} className='border-0 d-flex align-items-center'><b>Address</b></ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center'><b>Email</b></ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center '><b>Role</b></ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center'><b>Action</b></ListGroup.Item> 
-                                        
-                                    </ListGroup>  
-                                </div>
-                                <div className=''>
-                                    <ListGroup horizontal className='border-bottom'>
-                                    <ListGroup.Item style={{ width: '20%' }} className='border-0 d-flex align-items-center'>CustomerId</ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '25%' }} className='border-0 d-flex align-items-center '>UserName</ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center'>Contact </ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '15%' }} className='border-0 d-flex align-items-center '>Address</ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center '>Email</ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center'>Role</ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center'>
-                                            <button className="btn btn-danger m-1">Del</button>
-                                            <button className="btn btn-warning m-1 text-white">Edit</button>
-                                            
-                                        </ListGroup.Item> 
-                                    </ListGroup>
-                               
-
-                                </div>
-                                
-                                <div className='pt-5'>
-                                <p> <BsArrowLeft /> Back to Products</p>
-                                </div>
-                            </div>
-
-                            </div>
-                        </div>
-                        
+                    <section className="m-2">
+                        <Table hover borderless>
+                            <thead className=''>
+                            <tr className='border-bottom m-4'>
+                                <th >C.Id</th>
+                                <th>UserName</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Join Date</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {users && users.map((user, index) => {
+                                    return(
+                                        <tr className='border-bottom '>
+                                            <th scope="row">{user.id}</th>
+                                            <td>{user.username}</td>
+                                            <td>{user.contact}</td>
+                                            <td>{user.address}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.password}</td>
+                                            <td>{user.join_date}</td>
+                                            <td>{user.role}</td>
+                                            <td >
+                                                <div>
+                                                <button className="btn btn-danger m-1" onClick={() => { setDeleteUser(true); }}>Del</button>
+                                                <button className="btn btn-warning m-1 text-white" onClick={() => { setEditUser(true); }}>Edit</button>
+                                                <EditUser open={editUser} onClose={() => { setEditUser(false) }}/>
+                                                <DeleteUser open={deleteUser} onClose={()=>{setDeleteUser(false)}}/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                            
+                            </tbody>
+                        </Table>
                     </section>
+
+                    <p><Link to='/orders' className='d-flex text-decoration-none text-black'> <BsArrowLeft className='d-flex mt-1'/>See Orders</Link></p>
+                   
+
+
+                </section>
 
 
             </section>

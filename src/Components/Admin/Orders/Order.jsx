@@ -1,115 +1,99 @@
-import React from 'react'
-import {
-    Link
-} from "react-router-dom";
-import * as FaIcons from 'react-icons/fa';
-import { ListGroup } from 'react-bootstrap';
-import { BsArrowLeft } from "react-icons/bs";
+import React,{useState,useEffect} from 'react'
 import { Table } from 'reactstrap';
+import DeleteOrders from '../Delete/DeleteOrders';
+import { baseUrl } from "../../baseUrl";
+import EditOrders from '../Edit/EditOrders';
 
 export default function Order() {
+    const [deleteOrder,setDeleteOrder] = useState(false);
+    const [editOrder,setEditOrder] = useState(false);
+    const [orders,setOrders] = useState([]);
+    const [order,setOrder] = useState({});
+    const [search,setSearch] = useState("");
+
+    useEffect(() => {
+        fetchOrdersAPI();
+    }, [])
+
+     const fetchOrdersAPI = async () => {
+        await fetch(baseUrl + 'orders/getAllOrders.php')
+            .then((res) => res.json())
+            .then((res) => {
+                setOrders(res);
+                console.log(res);
+            }
+            )
+            .catch((e) => alert('Something went wrong!'));
+     }
+    
     return (
         <div>
-            <div>
-            
-            </div>
-                <section>
-                <div className="d-flex flex-wrap justify-content-between p-4" style={{background:"#FFFFFF" }}>
-                       <div className="d-flex">
-                            <h4>Orders</h4>
+
+                <div className="pt-4 pe-4">
+                    <input value={search} onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search Product and Users . . ." className="form-control ms-2" />
+                </div>
+
+                {orders && orders.reverse().map((order,index) => {
+                    return(
+                        <section style={{background:"#FFFFFF" }} className='m-3 p-3'>
+                       <div className="d-flex flex-column border-bottom">
+                           <div className='d-flex justify-content-around'>
+                               <p><b>UserName: </b>{order.UserName}</p>
+                                <p><b>Address: </b>{order.Address}</p>
+                                <p><b>Order Date: </b>{order.OrderDate}</p>
+                           </div>
+
+                           <div className='d-flex justify-content-center '>
+                                <button className="btn btn-danger m-1" onClick={() => { setDeleteOrder(true); }}>Delete Order</button>
+                                <button className="btn btn-primary m-1" onClick={() => {setEditOrder(true);}}>Edit Order</button>
+                                <EditOrders order={orders} open={editOrder} onClose={()=>{setEditOrder(false)}}/>
                             
-                        </div> 
-                        <div>
-                            <button className="btn btn fw-bold  ms-2" style={{background:"#2F80ED" ,color:"#FFFFFF"}}>Create</button> 
-                        </div> 
-                        
+                                <DeleteOrders open={deleteOrder} onClose={() => {setDeleteOrder(false)}}/>
+                            </div>
+                            
                     </div>
-                    <section className='d-flex justify-content-center align-items-center'
-                        style={{
-                            height: 'auto',
-                            fontFamily: 'sans-serif',
-                        }}>
-                        <div className='d-flex align-items-center justify-content-center p-5'
-                            style={{
-                            marginTop: '20px',
 
-                            }}>
-                            <div className='d-flex justify-content-center col-12 col-sm-6 col-md-12 col-lg-12'>
-                            <div className='col-md-12 border border-light p-4' style={{ backgroundColor: '#fff', borderRadius: "25px"}}>
-                                <div className='d-flex justify-content-between pb-3'>
-                                {/* <ListGroup horizontal className='border-bottom '>
-                                        <ListGroup.Item style={{ width: '20%' }} className='border-0 '><p>Text</p></ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '25%' }} className='border-0 d-flex flex-column align-items-start '>
-                                        <p className='mb-0 d-flex align-items-start'>Product Name</p>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-block my-auto '>
-                                        <div className='d-flex '>
-                                            <p className='m-1 border p-2'>Quantity </p>
-                                        </div>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '15%' }} className='border-0 d-flex align-items-center '>Rs. 100</ListGroup.Item> 
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-flex align-items-center '>Action</ListGroup.Item> 
-                                        
-                                    </ListGroup>  
-                                </div>
-                                <div className=''>
-                                    <ListGroup horizontal className='border-bottom p-3'>
-                                        <ListGroup.Item style={{ width: '20%' }} className='border-0 '> <img src="" alt="Product image" style={{ height: "50px", width: "50px", objectFit:"cover" }} /></ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '25%' }} className='border-0 d-flex flex-column align-items-start '>
-                                        <p className='text-muted mb-0 d-flex align-items-start'><b>Category</b></p>
-                                        <p className='mb-0 d-flex align-items-start'>Product Name</p>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '30%' }} className='border-0 d-block my-auto '>
-                                        <div className='d-flex '>
-                                            <p className='m-1 border p-2'>Quantity </p>
-                                        </div>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item style={{ width: '15%' }} className='border-0 d-flex align-items-center '>Rs. 100</ListGroup.Item> 
-                                    </ListGroup> */}
-                               <Table hover>
-        <thead className=''>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </Table>
-
-                                </div>
-                                
-                                <div className='pt-5'>
-                                <p> <BsArrowLeft /> Back to Shop</p>
-                                </div>
-                            </div>
-
-                            </div>
-                        </div>
-                        
+                    <section >
+                        <Table hover borderless>
+                            <thead style={{lineHeight:"50px"}}className='mt-12'>
+                            <tr className='border-bottom m-12 text-center align-middle'>
+                                <th>S.N</th>
+                                <th>Image</th>
+                                <th>Category</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {order.orderItems.map((orderItems,index) => {
+                                return(
+                                    <tr className='border-bottom text-center align-middle'>
+                                        <th scope="row">{index+1}</th>
+                                        <td><img src={baseUrl+orderItems.Image} alt="Product image" style={{ height: "60px", width: "60px", objectFit:"cover" }}/></td>
+                                        <td>{orderItems.CatName}</td>
+                                        <td>{orderItems.ProductName}</td>
+                                        <td>{orderItems.Quantity}</td>
+                                        <td>{orderItems.Price}</td>
+                                    </tr>
+                                )
+                            })}
+                            
+                            </tbody>
+                        </Table>
                     </section>
 
+                    <div className='d-flex justify-content-between ps-4 pe-4'>
+
+
+                    <p>Line Total:</p>
+                    
+                    </div>
                 </section>
+                    )
+                })}
+                
+                
                 
         </div>
     )

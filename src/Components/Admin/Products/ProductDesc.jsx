@@ -1,9 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import {
-    Link
-} from "react-router-dom";
-// import { baseUrl } from "../baseUrl";
-// import { baseUrl } from "../../baseUrl";
+import React, { useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import { baseUrl } from '../../baseUrl';
 
