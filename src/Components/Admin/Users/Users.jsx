@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import {
     Link
 } from "react-router-dom";
-import * as FaIcons from 'react-icons/fa';
 import { BsArrowLeft } from "react-icons/bs";
-import { ListGroup } from "react-bootstrap";
 import { Table } from "reactstrap";
-import EditUser from "../Edit/Edit User";
 import CreateUser from "./CreateUser";
 import DeleteUser from "../Delete/DeleteUser";
 import { baseUrl } from "../../baseUrl";
+import swal from 'sweetalert'; 
 
 export default function Users() {
 
@@ -17,6 +15,8 @@ export default function Users() {
     const [createUser, setCreateUser] = useState(false);
     const [deleteUser,setDeleteUser] = useState(false);
     const [users, setUsers] = useState([]);
+    const [search, setSearch] = useState("");
+    
 
     useEffect(() => {
         fetchUserAPI();
@@ -29,7 +29,9 @@ export default function Users() {
                 setUsers(res);
                 console.log(res);
             })
-            .catch((e) => alert('Something went wrong!'));
+            .catch((e) => 
+            swal("Something went wrong!", "Please try again later", "error"));
+            // alert('Something went wrong!'));
 
     }
     return (
@@ -49,13 +51,13 @@ export default function Users() {
                     </div>
 
                     <div className="pt-4 pe-4">
-                       <input  placeholder="Search Users . . ." className="form-control ms-2"/>
+                       <input value={search} onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search Users . . ." className="form-control ms-2"/>
                     </div>
 
                     <section style={{background:"#FFFFFF" }} className='mt-4 p-3 m-2'>
 
                     <section className="m-2">
-                        <Table hover borderless>
+                        <Table hover borderless responsive>
                             <thead className=''>
                             <tr className='border-bottom m-4'>
                                 <th >C.Id</th>
@@ -63,14 +65,15 @@ export default function Users() {
                                 <th>Contact</th>
                                 <th>Address</th>
                                 <th>Email</th>
-                                <th>Password</th>
-                                <th>Join Date</th>
+                                <th> Join TimeStamp</th>
                                 <th>Role</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                {users && users.map((user, index) => {
+                                {users && 
+                                search.length>0?
+                                users.filter((user)=>user.username.toLowerCase().includes(search.toLowerCase())).map((user, index) => { 
                                     return(
                                         <tr className='border-bottom '>
                                             <th scope="row">{user.id}</th>
@@ -78,14 +81,33 @@ export default function Users() {
                                             <td>{user.contact}</td>
                                             <td>{user.address}</td>
                                             <td>{user.email}</td>
-                                            <td>{user.password}</td>
                                             <td>{user.join_date}</td>
                                             <td>{user.role}</td>
                                             <td >
                                                 <div>
                                                 <button className="btn btn-danger m-1" onClick={() => { setDeleteUser(true); }}>Del</button>
-                                                <button className="btn btn-warning m-1 text-white" onClick={() => { setEditUser(true); }}>Edit</button>
-                                                <EditUser open={editUser} onClose={() => { setEditUser(false) }}/>
+                                                {/* <button className="btn btn-warning m-1 text-white" onClick={() => { setEditUser(true); }}>Edit</button>
+                                                <EditUser user={user} open={editUser} onClose={() => { setEditUser(false) }}/> */}
+                                                <DeleteUser open={deleteUser} onClose={()=>{setDeleteUser(false)}}/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )
+                                }):users.map((user, index) => { 
+                                    return(
+                                        <tr className='border-bottom '>
+                                            <th scope="row">{user.id}</th>
+                                            <td>{user.username}</td>
+                                            <td>{user.contact}</td>
+                                            <td>{user.address}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.join_date}</td>
+                                            <td>{user.role}</td>
+                                            <td >
+                                                <div>
+                                                <button className="btn btn-danger m-1" onClick={() => { setDeleteUser(true); }}>Del</button>
+                                                {/* <button className="btn btn-warning m-1 text-white" onClick={() => { setEditUser(true); }}>Edit</button>
+                                                <EditUser user={user} open={editUser} onClose={() => { setEditUser(false) }}/> */}
                                                 <DeleteUser open={deleteUser} onClose={()=>{setDeleteUser(false)}}/>
                                                 </div>
                                             </td>

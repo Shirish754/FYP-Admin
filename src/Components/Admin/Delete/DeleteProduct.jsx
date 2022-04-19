@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { baseUrl } from '../../baseUrl'
+import swal from 'sweetalert';
 
 export default function DeleteProduct(props) {
 
@@ -17,9 +18,11 @@ export default function DeleteProduct(props) {
         .then(res=>res.json())
         .then(res=>{
             if(res){
-
-                alert('Product Deleted Successfully');
-                window.location.reload(true);
+                swal("Product Deleted Successfully", "", "success").then(()=>{
+                    window.location.reload(true);
+                });
+                // alert('Product Deleted Successfully');
+                // window.location.reload(true);
             }else{
                 alert('Something went wrong');
             }

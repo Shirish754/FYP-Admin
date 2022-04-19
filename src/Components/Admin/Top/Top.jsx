@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import * as FaIcons from 'react-icons/fa';
+import React from "react";
 
 
 export default function Top() {
-    const [searchQuery, setSearchQuery] = useState("");
     return (
         <div>
             <section  style ={{width:"100% " ,margin:"5px 100px 5px 5px" }}className="d-flex flex-wrap justify-content-between ">

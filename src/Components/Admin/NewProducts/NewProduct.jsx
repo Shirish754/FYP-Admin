@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import { FaIcons } from 'react-icons/fa';
 import { baseUrl } from '../../baseUrl';
+import swal from 'sweetalert'; 
 
 
 export default function NewProduct(props) {
@@ -34,10 +35,14 @@ export default function NewProduct(props) {
          .then((res) => res.json())
          .then((res) => {
             if(res){
-                alert('Category added successfully!');
-                window.location.reload(true);
+                swal("Category Added Successfully", "", "success").then(()=>{
+                    window.location.reload(true);
+                });
+                // alert('Category added successfully!');
+                // window.location.reload(true);
             }else{
-                alert('Something went wrong!');
+                swal("Something went wrong", "", "error");
+                // alert('Something went wrong!');
             }
          }
         )
@@ -62,11 +67,13 @@ export default function NewProduct(props) {
         .then(res => res.json())
         .then(res => {
             if (res === true) {
-                alert('Product Added Successfully');
+                swal("Product Added Successfully", "", "success");
+                // alert('Product Added Successfully');
                 window.location.reload(true);
             }
             else {
-                alert('Something went wrong');
+                swal("Something went wrong", "", "error");
+                // alert('Something went wrong');
             }
         }
         )

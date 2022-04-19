@@ -42,7 +42,7 @@ export default function Sidebar() {
               </li>
             </Link >
             <div className="text-danger">
-            <li onClick={() => { setIsLogOutOpen(true); }} className="sidebarListItem">
+            <li onClick={() => { setIsLogOutOpen(true); }} className="sidebarListItem" style={{color:"red"}}>
                 <FaIcons.FaSignOutAlt/>
                 Logout
               </li>

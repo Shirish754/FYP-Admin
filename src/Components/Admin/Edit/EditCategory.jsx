@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap'
 import { baseUrl } from '../../baseUrl';
+import swal from 'sweetalert'; 
 
 export default function EditCategory(props) {
 
@@ -32,15 +33,20 @@ export default function EditCategory(props) {
             .then((res) => res.json())
             .then((res) => {
                 if (res === true) {
-                    alert('Successfully updated!');
-                    window.location.reload(true);
+                    swal("Category Edited Successfully", "", "success").then(()=>{
+                        window.location.reload(true);
+                    });
+                    // alert('Successfully updated!');
+                    // window.location.reload(true);
                 }
                 else {
-                    alert('Something went wrong!');
+                    swal("Something went wrong", "", "error");
+                    // alert('Something went wrong!');
                 }
             })
             .catch(e => {
-                alert('Something went wrong!');
+                swal("Something went wrong", "", "error");
+                // alert('Something went wrong!');
             })
     }
 

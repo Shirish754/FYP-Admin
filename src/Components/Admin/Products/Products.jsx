@@ -6,6 +6,7 @@ import CollapsibleUI from "./CollapsibleUI";
 import * as FaIcons from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import DeleteProduct from "../Delete/DeleteProduct";
+import swal from 'sweetalert';  
 
 
 
@@ -32,7 +33,9 @@ export default function Products() {
                 setCategories(res);
                 console.log(res);
             })
-            .catch((e) => alert('Something went wrong!'));
+            .catch((e) => 
+            swal("Something went wrong!", "Please try again later", "error"));
+            // alert('Something went wrong!'));
 
     }
 
@@ -48,7 +51,9 @@ export default function Products() {
             .then((res) => {
                 setProducts(res);
             })
-            .catch((e) => alert('Something went wrong!'));
+            .catch((e) => 
+            swal("Something went wrong!", "Please try again later", "error"));
+            // alert('Something went wrong!'));
 
 
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { baseUrl } from '../../baseUrl';
+import swal from 'sweetalert'; 
 
 export default function DeleteCategory(props) {
 
@@ -16,14 +17,19 @@ export default function DeleteCategory(props) {
         .then(res=>res.json())
         .then(res=>{
             if(res){
-
-                alert('Category Deleted Successfully');
-                window.location.reload(true);
+                swal("Category Deleted Successfully", "", "success").then(()=>{
+                    window.location.reload(true);
+                });
+                // alert('Category Deleted Successfully');
+                // window.location.reload(true);
             }else{
-                alert('Something went wrong');
+                swal("Something went wrong", "", "error");
+                // alert('Something went wrong');
             }
         })
-        .catch(e=>alert('Something went wrong!'))
+        .catch(e=>
+            swal("Something went wrong", "", "error"))
+            // alert('Something went wrong!'))
     }
     return (
         <div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap'
+import swal from 'sweetalert';
 import { baseUrl } from '../../baseUrl';
 
 export default function EditProduct(props) {
@@ -43,15 +44,20 @@ export default function EditProduct(props) {
             .then((res) => res.json())
             .then((res) => {
                 if (res === true) {
-                    alert('Product Successfully Updated!');
-                    window.location.reload();
+                    swal("Product Edited Successfully", "", "success").then(() => {
+                        window.location.reload(true);
+                    });
+                    // alert('Product Successfully Updated!');
+                    // window.location.reload();
                 }
                 else {
-                    alert('Something went wrong!');
+                    swal("Something went wrong", "", "error");
+                    // alert('Something went wrong!');
                 }
             })
             .catch(e => {
-                alert('Something went wrong!');
+                swal("Something went wrong", "", "error");
+                // alert('Something went wrong!');
             })
     }
 

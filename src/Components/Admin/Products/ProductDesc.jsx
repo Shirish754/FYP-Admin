@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import { baseUrl } from '../../baseUrl';
+import swal from 'sweetalert'; 
 
 export default function ProductDesc({id}) {
 
@@ -17,7 +18,9 @@ export default function ProductDesc({id}) {
                 var product = res.filter((p)=>p.id === id);
                 setProduct(product[0]);
             })
-            .catch((e) => alert('Something went wrong!'));
+            .catch((e) => 
+            swal("Something went wrong!", "Please try again later", "error"));
+            // alert('Something went wrong!'));
 
 
 
@@ -41,7 +44,7 @@ export default function ProductDesc({id}) {
                                         </div>
                                         
                                         <p className="fs-2 accent-color text-center">{product.name}</p>
-                                        <p className="text-center text-wrap">{product.description}</p>
+                                        <p className="text-wrap" style={{textAlign:"justify"}}>{product.description}</p>
                                         
                                     </div>
                                 </div>
