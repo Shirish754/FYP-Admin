@@ -69,7 +69,7 @@ export default function Order() {
                         )
                     })
                     :
-                    orders.reverse().map((order,index) => {
+                    orders.filter((e)=>e).reverse().map((order,index) => {
                     return(
                         <OrderCard order={order} fetchOrders={()=>{fetchOrdersAPI();}}/>
                     )
@@ -146,7 +146,7 @@ const OrderCard = ({order, fetchOrders})=>{
 
                     <div className='d-flex justify-content-between ps-4 pe-4'>
                         <p><b>Delivery Status:</b> {order.status}</p>
-                        <p><b>Payment Status: </b>{order.isPaid===0?'Pending':'Paid'}</p>
+                        <p><b>Payment Status: </b>{order.isPaid==="0"?'Pending':'Paid'}</p>
                        <p><b>Total:</b>Rs.{order.orderItems.length > 0 ? order.orderItems.length ===1 ?parseInt(order.orderItems[0].LineTotal): order.orderItems.reduce((a,b)=>a+parseInt(b.LineTotal),0):""}</p>
                     
                     </div>

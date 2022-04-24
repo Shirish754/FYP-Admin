@@ -9,6 +9,7 @@ import DeleteUser from "../Delete/DeleteUser";
 import { baseUrl } from "../../baseUrl";
 import swal from 'sweetalert'; 
 
+
 export default function Users() {
 
     const [editUser,setEditUser] = useState(false);
@@ -16,7 +17,7 @@ export default function Users() {
     const [deleteUser,setDeleteUser] = useState(false);
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
-    
+    const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
         fetchUserAPI();
@@ -93,7 +94,7 @@ export default function Users() {
                                             </td>
                                         </tr>
                                     )
-                                }):users.map((user, index) => { 
+                                }):users.filter((e,index)=>index-1 < pageSize).map((user, index) => { 
                                     return(
                                         <tr className='border-bottom '>
                                             <th scope="row">{user.id}</th>
@@ -108,7 +109,7 @@ export default function Users() {
                                                 <button className="btn btn-danger m-1" onClick={() => { setDeleteUser(true); }}>Del</button>
                                                 {/* <button className="btn btn-warning m-1 text-white" onClick={() => { setEditUser(true); }}>Edit</button>
                                                 <EditUser user={user} open={editUser} onClose={() => { setEditUser(false) }}/> */}
-                                                <DeleteUser open={deleteUser} onClose={()=>{setDeleteUser(false)}}/>
+                                                <DeleteUser id={user.id} open={deleteUser} onClose={()=>{setDeleteUser(false)}}/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -119,7 +120,14 @@ export default function Users() {
                         </Table>
                     </section>
 
+                    <div className="d-flex justify-content-between">
                     <p><Link to='/orders' className='d-flex text-decoration-none text-black'> <BsArrowLeft className='d-flex mt-1'/>See Orders</Link></p>
+                    <div className="d-flex">
+                        <p className=" m-1">No of Rows:</p>
+                    <input type="number" value={pageSize} onChange={(e)=>{setPageSize(e.target.value)}}/>
+                    </div>
+                    </div>
+                   
                    
 
 

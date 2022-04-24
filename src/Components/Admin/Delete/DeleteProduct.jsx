@@ -14,6 +14,7 @@ export default function DeleteProduct(props) {
         await fetch(baseUrl+'products/deleteProducts.php',{
             method:'POST',
             body:formdata,
+            
         })
         .then(res=>res.json())
         .then(res=>{
@@ -24,10 +25,15 @@ export default function DeleteProduct(props) {
                 // alert('Product Deleted Successfully');
                 // window.location.reload(true);
             }else{
-                alert('Something went wrong');
+                swal("Something went wrong", "", "error");
+
+                // alert('Something went wrong');
             }
         })
-        .catch(e=>alert('Something went wrong!'))
+        .catch(e=>
+            swal("Something went wrong", "", "error"))
+            
+            // alert('Something went wrong!'))
     }
 
     return (

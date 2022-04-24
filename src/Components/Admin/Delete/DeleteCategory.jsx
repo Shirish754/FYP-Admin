@@ -42,7 +42,7 @@ export default function DeleteCategory(props) {
                 <p>Are you sure?</p>
                 <div className ="d-flex justify-content-between">
                 <button className=" btn btn fw-bold  ms-2 bg-danger text-white">Cancel</button>
-                <button className=" btn btn fw-bold  ms-2 bg-primary text-white">Yes</button>
+                <button type="submit" className=" btn btn fw-bold  ms-2 bg-primary text-white">Yes</button>
                 </div>
                 
             </form>
